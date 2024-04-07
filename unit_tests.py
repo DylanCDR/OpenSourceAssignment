@@ -3,6 +3,7 @@ from unittest.mock import MagicMock
 from tkinter import Tk
 from tic_tac_toe import TicTacToeGame, TicTacToeBoard, Player, Move
 
+
 class TestTicTacToe(unittest.TestCase):
     def setUp(self):
         self.players = (Player(label="X", color="blue"), Player(label="O", color="green"))
@@ -36,6 +37,7 @@ class TestTicTacToe(unittest.TestCase):
         self.assertFalse(self.game.is_tied())
         self.assertEqual(self.game.current_player, self.players[0])
 
+
 class TestTicTacToeBoard(unittest.TestCase):
     def setUp(self):
         self.game_mock = MagicMock(spec=TicTacToeGame)
@@ -55,11 +57,11 @@ class TestTicTacToeBoard(unittest.TestCase):
             fg=self.board._game.current_player.color
         )
 
-
     def test_update_display(self):
         self.board._update_display("Test Message", "red")
         self.assertEqual(self.board.display["text"], "Test Message")
         self.assertEqual(self.board.display["fg"], "red")
+
 
 if __name__ == '__main__':
     unittest.main()
