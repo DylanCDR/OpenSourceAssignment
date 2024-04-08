@@ -1,6 +1,5 @@
 import unittest
 from unittest.mock import MagicMock, patch
-from tkinter import Tk
 from tic_tac_toe import TicTacToeGame, TicTacToeBoard, Player, Move
 
 
@@ -49,31 +48,6 @@ class TestTicTacToeBoard(unittest.TestCase):
         self.board = TicTacToeBoard(self.game_mock)
 
     def test_initialization(self):
-        self.assertIsInstance(self.board, Tk)
-        self.assertIsNotNone(self.board.display)
-
-    def test_update_button(self):
-        button_mock = MagicMock()
-        self.board._update_button(button_mock)
-        button_mock.config.assert_called_once_with(
-            text=self.board._game.current_player.label,
-            fg=self.board._game.current_player.color
-        )
-
-    def test_update_display(self):
-        self.board._update_display("Test Message", "red")
-        self.assertEqual(self.board.display["text"], "Test Message")
-        self.assertEqual(self.board.display["fg"], "red")
-
-
-class TestTicTacToeBoard(unittest.TestCase):
-    def setUp(self):
-        self.game_mock = MagicMock(spec=TicTacToeGame)
-        self.game_mock.board_size = 3
-        self.game_mock.current_player = Player(label="X", color="blue")
-        self.board = TicTacToeBoard(self.game_mock)
-
-    def test_initialization(self):
         with patch('tkinter.Tk', MagicMock()), \
              patch('tkinter.Label', MagicMock()), \
              patch('tkinter.Button', MagicMock()):
@@ -88,6 +62,7 @@ class TestTicTacToeBoard(unittest.TestCase):
                 text=self.board._game.current_player.label,
                 fg=self.board._game.current_player.color
             )
+
 
 def test_update_display(self):
     with patch.object(self.board.display, 'config') as config_mock:
