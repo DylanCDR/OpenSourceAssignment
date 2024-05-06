@@ -20,7 +20,8 @@ class Move(NamedTuple):
 
 
 BOARD_SIZE = 3
-DEFAULT_PLAYERS = (Player(label="X", color="black"), Player(label="O", color="red"))
+DEFAULT_PLAYERS = (Player(label="X", color="black"), Player(label="O",
+                                                            color="red"))
 
 
 class TicTacToeGame:
@@ -43,7 +44,8 @@ class TicTacToeGame:
         self._winning_combos = self._get_winning_combos()
 
     def _get_winning_combos(self):
-        rows = [[(move.row, move.col) for move in row] for row in self._current_moves]
+        rows = [[(move.row, move.col)
+                 for move in row] for row in self._current_moves]
         columns = [list(col) for col in zip(*rows)]
         first_diagonal = [row[i] for i, row in enumerate(rows)]
         second_diagonal = [col[j] for j, col in enumerate(reversed(columns))]
@@ -75,7 +77,8 @@ class TicTacToeGame:
     def is_tied(self):
         """Return True if the game is tied, and False otherwise."""
         no_winner = not self._has_winner
-        played_moves = (move.label for row in self._current_moves for move in row)
+        played_moves = (move.label
+                        for row in self._current_moves for move in row)
         return no_winner and all(played_moves)
 
     def toggle_player(self):
@@ -129,7 +132,8 @@ class TicTacToeBoard(tk.Tk):
         display_frame = tk.Frame(master=self)
         display_frame.pack(fill=tk.X)
         self.display = tk.Label(
-            master=display_frame, text="Ready?", font=font.Font(size=28, weight="bold")
+            master=display_frame, text="Ready?", font=font.Font(size=28,
+                                                                weight="bold")
         )
         self.display.pack()
 
@@ -158,7 +162,8 @@ class TicTacToeBoard(tk.Tk):
     # Author: @carinazchan
     def _start_two_player_game(self):
         self._game = TicTacToeGame(
-            players=(Player(label="X", color="black"), Player(label="O", color="red"))
+            players=(Player(label="X", color="black"), Player(label="O",
+                                                              color="red"))
         )
         self.reset_board()
 
@@ -166,7 +171,8 @@ class TicTacToeBoard(tk.Tk):
     # Author: @carinazchan
     def _start_cpu_player_game(self):
         self._game = TicTacToeGame(
-            players=(Player(label="X", color="black"), Player(label="O", color="blue"))
+            players=(Player(label="X", color="black"), Player(label="O",
+                                                              color="blue"))
         )
         self.reset_board()
 
@@ -180,7 +186,8 @@ class TicTacToeBoard(tk.Tk):
     # method to update clicked buttons
     def _update_button(self, clicked_btn):
         clicked_btn.config(
-            text=self._game.current_player.label, fg=self._game.current_player.color
+            text=self._game.current_player.label,
+            fg=self._game.current_player.color
         )
 
     # method to update display once a button has been clicked
@@ -219,7 +226,8 @@ class TicTacToeBoard(tk.Tk):
                         next(
                             btn
                             for btn, (r, c) in self._cells.items()
-                            if r == computer_move.row and c == computer_move.col
+                            if r == computer_move.row
+                            and c == computer_move.col
                         )
                     )
                     self._game.toggle_player()
@@ -263,12 +271,14 @@ def main():
 
     if option == "1":
         game = TicTacToeGame(
-            players=(Player(label="X", color="black"), Player(label="O", color="red"))
+            players=(Player(label="X", color="black"), Player(label="O",
+                                                              color="red"))
         )
         game.play_mode = "_start_two_player_game"
     elif option == "2":
         game = TicTacToeGame(
-            players=(Player(label="X", color="black"), Player(label="O", color="blue"))
+            players=(Player(label="X", color="black"), Player(label="O",
+                                                              color="blue"))
         )
         game.play_mode = "_start_cpu_player_game"
     else:
