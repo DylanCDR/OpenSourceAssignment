@@ -262,6 +262,17 @@ class TicTacToeBoard(tk.Tk):
 
 # main method for game/board creation
 def main():
+    
+    player1_label = input("Enter the character for Player 1: ").strip()
+    player1_color = "black"
+    player2_label = input("Enter the character for Player 2: ").strip()
+    player2_color = "red"
+
+    game = TicTacToeGame(
+        players=(Player(label=player1_label, color=player1_color),
+                 Player(label=player2_label, color=player2_color))
+    )
+
     option = input(
         """Welcome to Tic Tac Toe! Please input an option and press enter:
           1 = Two Player Game
@@ -270,16 +281,8 @@ def main():
     )
 
     if option == "1":
-        game = TicTacToeGame(
-            players=(Player(label="X", color="black"), Player(label="O",
-                                                              color="red"))
-        )
         game.play_mode = "_start_two_player_game"
     elif option == "2":
-        game = TicTacToeGame(
-            players=(Player(label="X", color="black"), Player(label="O",
-                                                              color="blue"))
-        )
         game.play_mode = "_start_cpu_player_game"
     else:
         print("Invalid option. Please start over.")
@@ -287,7 +290,6 @@ def main():
 
     board = TicTacToeBoard(game)
     board.mainloop()
-
 
 if __name__ == "__main__":
     main()
